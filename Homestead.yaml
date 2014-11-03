@@ -9,12 +9,19 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: ~/Code
-      to: /home/vagrant/Code
+    - map: ~/Sites
+      to: /home/vagrant/sites
 
 sites:
-    - map: homestead.app
-      to: /home/vagrant/Code/Laravel/public
+    - map: nudge.app
+      to: /home/vagrant/sites/nudgeyourself
+    - map: nudge-api.app
+      to: /home/vagrant/sites/nudge-api/public
+
+#These are configured just like "sites" above but have a special port redirect to nudge-api (necessary for nudge coach)
+sites-redirect:
+    - map: nudge-coach.app
+      to: /home/vagrant/sites/nudge-coach/public
 
 variables:
     - key: APP_ENV

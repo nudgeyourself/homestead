@@ -17,6 +17,7 @@ class Homestead
 
     # Configure Port Forwarding To The Box
     config.vm.network "forwarded_port", guest: 80, host: 8000
+    config.vm.network "forwarded_port", guest: 81, host: 8100
     config.vm.network "forwarded_port", guest: 3306, host: 33060
     config.vm.network "forwarded_port", guest: 5432, host: 54320
 
@@ -56,6 +57,19 @@ class Homestead
             s.args = [site["map"], site["to"]]
           end
       end
+    end
+
+    # Install All The Configured Nginx Sites
+    settings["sites-redirect"].each do |site|
+      config.vm.provision "shell" do |s|
+        s.inline = "bash /vagrant/scripts/serve-redirect.sh $1 $2"
+        s.args = [site["map"], site["to"]]
+      end
+    end
+
+    # Install custom nginx.conf
+    config.vm.provision "shell" do |s|
+      s.inline = "bash /vagrant/scripts/update-nginx.sh"
     end
 
     # Configure All Of The Server Environment Variables

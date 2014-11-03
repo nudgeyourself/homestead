@@ -24,6 +24,14 @@ block="server {
     sendfile off;
 
     location ~ \.php$ {
+        fastcgi_buffer_size 128k;
+        fastcgi_buffers 4 256k;
+        fastcgi_busy_buffers_size 256k;
+        fastcgi_read_timeout 300;
+        fastcgi_connect_timeout 300;
+        fastcgi_send_timeout 300;
+        fastcgi_intercept_errors on;
+        fastcgi_next_upstream error invalid_header timeout http_500;
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
         fastcgi_pass unix:/var/run/php5-fpm.sock;
         fastcgi_index index.php;

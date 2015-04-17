@@ -15,13 +15,16 @@ folders:
 sites:
     - map: nudge.app
       to: /home/vagrant/sites/nudgeyourself
+      port: "81"
     - map: nudge-api.app
       to: /home/vagrant/sites/nudge-api/public
+      port: "80"
 
 #These are configured just like "sites" above but have a special port redirect to nudge-api (necessary for nudge coach)
 sites-redirect:
     - map: nudge-coach.app
       to: /home/vagrant/sites/nudge-coach/public
+      port: "80"
 
 variables:
     - key: APP_ENV

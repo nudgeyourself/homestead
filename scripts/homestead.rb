@@ -50,11 +50,11 @@ class Homestead
     settings["sites"].each do |site|
       config.vm.provision "shell" do |s|
           if (site.has_key?("hhvm") && site["hhvm"])
-            s.inline = "bash /vagrant/scripts/serve-hhvm.sh $1 $2"
-            s.args = [site["map"], site["to"]]
+            s.inline = "bash /vagrant/scripts/serve-hhvm.sh $1 $2 $3"
+            s.args = [site["map"], site["to"], site["port"]]
           else
-            s.inline = "bash /vagrant/scripts/serve.sh $1 $2"
-            s.args = [site["map"], site["to"]]
+            s.inline = "bash /vagrant/scripts/serve.sh $1 $2 $3"
+            s.args = [site["map"], site["to"], site["port"]]
           end
       end
     end
@@ -62,8 +62,8 @@ class Homestead
     # Install All The Configured Nginx Sites
     settings["sites-redirect"].each do |site|
       config.vm.provision "shell" do |s|
-        s.inline = "bash /vagrant/scripts/serve-redirect.sh $1 $2"
-        s.args = [site["map"], site["to"]]
+        s.inline = "bash /vagrant/scripts/serve-redirect.sh $1 $2 $3"
+        s.args = [site["map"], site["to"], site["port"]]
       end
     end
 

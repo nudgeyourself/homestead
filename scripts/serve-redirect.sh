@@ -43,7 +43,7 @@ block="server {
     }
 
     location /api {
-        rewrite ^/api(/.*)$ $1 break;
+        rewrite ^/api(/.*)$ \$1 break;
         proxy_pass http://localhost:80;
     }
 }

@@ -14,7 +14,7 @@ folders:
 
 sites:
     - map: nudge.app
-      to: /home/vagrant/sites/nudgeyourself
+      to: /home/vagrant/sites/nudge-site
       port: "81"
     - map: nudge-api.app
       to: /home/vagrant/sites/nudge-api/public
